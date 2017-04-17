@@ -11,6 +11,8 @@ using Microsoft.EntityFrameworkCore;
 using System.Reflection;
 using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
+using Server.Entity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace Server
 {
@@ -23,11 +25,19 @@ namespace Server
             var connectionString = @"Data Source=bun-v-server;Initial Catalog=IdentityServer;Persist Security Info=True;User ID=sa;Password=as;";
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
+            services.AddDbContext<MyContext>(options =>
+            {
+                options.UseSqlServer(connectionString);
+            });
 
             services.AddIdentityServer()
                 .AddTemporarySigningCredential()
                 .AddConfigurationStore(builder => builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(migrationsAssembly)))
                 .AddOperationalStore(builder => builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(migrationsAssembly)));
+
+            services.AddIdentity<IdentityServerUser, IdentityRole>()
+                .AddEntityFrameworkStores<MyContext>()
+                .AddDefaultTokenProviders();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
