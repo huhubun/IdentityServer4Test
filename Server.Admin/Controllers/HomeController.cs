@@ -1,9 +1,5 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
 namespace Server.Admin.Controllers
 {
@@ -12,7 +8,7 @@ namespace Server.Admin.Controllers
     {
         public IActionResult Index()
         {
-            return Content("HomeController Index");
+            return View();
         }
     }
 }
