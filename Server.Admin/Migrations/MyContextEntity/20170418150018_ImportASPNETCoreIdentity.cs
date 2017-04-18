@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Metadata;
 
-namespace Server.Migrations.MyContextEntity
+namespace Server.Admin.Migrations.MyContextEntity
 {
-    public partial class AddTestTable : Migration
+    public partial class ImportASPNETCoreIdentity : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

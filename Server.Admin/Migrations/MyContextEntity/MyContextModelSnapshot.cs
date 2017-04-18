@@ -3,15 +3,14 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Migrations;
-using Server;
+using Server.Admin;
 
-namespace Server.Migrations.MyContextEntity
+namespace Server.Admin.Migrations.MyContextEntity
 {
     [DbContext(typeof(MyContext))]
-    [Migration("20170417152233_AddTestTable")]
-    partial class AddTestTable
+    partial class MyContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")
@@ -124,7 +123,7 @@ namespace Server.Migrations.MyContextEntity
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("Server.Entity.IdentityServerUser", b =>
+            modelBuilder.Entity("Server.Admin.Entity.IdentityServerUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -174,7 +173,7 @@ namespace Server.Migrations.MyContextEntity
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("Server.Entity.Test", b =>
+            modelBuilder.Entity("Server.Admin.Entity.Test", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -196,7 +195,7 @@ namespace Server.Migrations.MyContextEntity
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("Server.Entity.IdentityServerUser")
+                    b.HasOne("Server.Admin.Entity.IdentityServerUser")
                         .WithMany("Claims")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -204,7 +203,7 @@ namespace Server.Migrations.MyContextEntity
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.EntityFrameworkCore.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("Server.Entity.IdentityServerUser")
+                    b.HasOne("Server.Admin.Entity.IdentityServerUser")
                         .WithMany("Logins")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);
@@ -217,7 +216,7 @@ namespace Server.Migrations.MyContextEntity
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade);
 
-                    b.HasOne("Server.Entity.IdentityServerUser")
+                    b.HasOne("Server.Admin.Entity.IdentityServerUser")
                         .WithMany("Roles")
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Cascade);

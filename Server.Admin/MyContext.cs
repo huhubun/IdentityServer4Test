@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using Server.Entity;
+using Server.Admin.Entity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace Server
+namespace Server.Admin
 {
     public class MyContext : IdentityDbContext<IdentityServerUser>
     {
