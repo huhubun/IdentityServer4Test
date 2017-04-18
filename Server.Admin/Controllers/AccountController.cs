@@ -19,12 +19,12 @@ namespace Server.Admin.Controllers
 
         public AccountController(UserManager<IdentityServerUser> userManager,
             SignInManager<IdentityServerUser> signInManager,
-            ILogger logger,
+            ILoggerFactory loggerFactory,
             IOptions<IdentityCookieOptions> identityCookieOptions)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _logger = logger;
+            _logger = loggerFactory.CreateLogger<AccountController>();
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
         }
 
