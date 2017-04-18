@@ -1,0 +1,34 @@
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Clients List</h2>
+
+<a asp-action="Add" class="btn btn-success">Add Client</a>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id</th>
+            <th>ClientId</th>
+            <th>ClientName</th>
+            <th>IsEnabled</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var client in ViewBag.Clients)
+        {
+            <tr>
+                <td>@client.Id</td>
+                <td>@client.ClientId</td>
+                <td>@client.ClientName</td>
+                <td>@client.Enabled</td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@client.Id">Edit</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>

@@ -57,6 +57,8 @@ namespace Server.Admin
                 .AddOperationalStore(builder => builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(migrationsAssembly)));
 
             services.AddMvc();
+
+            services.AddScoped<ConfigurationDbContext>();
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
