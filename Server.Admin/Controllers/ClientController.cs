@@ -45,6 +45,7 @@ namespace Server.Admin.Controllers
         {
             var client = _configurationDbContext.Clients.Include(c => c.AllowedGrantTypes).Single(c => c.Id == id);
 
+            // TODO 
             return View(client.ToModel() as ClientViewModel);
         }
 
