@@ -1,8 +1,11 @@
+using AutoMapper;
 using IdentityServer4.EntityFramework.DbContexts;
+using IdentityServer4.EntityFramework.Entities;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Admin.Mappers;
+using Server.Admin.Models.ClientViewModels;
 using System.Linq;
 
 namespace Server.Admin.Controllers
@@ -52,17 +55,23 @@ namespace Server.Admin.Controllers
             //return View(Mapper.Map<ClientViewModel>(client.ToModel()));
         }
 
-        //[HttpPost]
-        //public IActionResult Edit(ClientViewModel client)
-        //{
-        //    var clientEntity = _configurationDbContext.Clients.Find(client.Id);
+        [HttpPost]
+        public IActionResult Edit(ClientViewModel client)
+        {
+            var clientEntity = _configurationDbContext.Clients.Include(c => c.AllowedGrantTypes).Single(c => c.Id == client.Id);
 
-        //    clientEntity.ClientName = client.ClientName;
+            clientEntity = Mapper.Map<ClientViewModel, Client>(client, clientEntity);
 
-        //    _configurationDbContext.SaveChanges();
+            return View();
 
-        //    return RedirectToAction(nameof(Edit), new { id = clientEntity.Id });
-        //}
+            //var clientEntity = _configurationDbContext.Clients.Find(client.Id);
+
+            //clientEntity.ClientName = client.ClientName;
+
+            //_configurationDbContext.SaveChanges();
+
+            //return RedirectToAction(nameof(Edit), new { id = clientEntity.Id });
+        }
 
     }
 }

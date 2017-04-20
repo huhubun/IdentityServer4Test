@@ -35,12 +35,12 @@ namespace Server.Admin.Models.ClientViewModels
         public bool AllowAccessTokensViaBrowser { get; set; }
         public string LogoUri { get; set; }
 
-        public Dictionary<int, string> AllowedScopes { get; set; }
-        public Dictionary<int, string> RedirectUris { get; set; }
-        public Dictionary<int, string> IdentityProviderRestrictions { get; set; }
-        public Dictionary<int, string> AllowedGrantTypes { get; set; }
-        public Dictionary<int, string> AllowedCorsOrigins { get; set; }
-        public Dictionary<int, string> PostLogoutRedirectUris { get; set; }
+        public List<KeyValuePair<int, string>> AllowedScopes { get; set; }
+        public List<KeyValuePair<int, string>> RedirectUris { get; set; }
+        public List<KeyValuePair<int, string>> IdentityProviderRestrictions { get; set; }
+        public List<KeyValuePair<int, string>> AllowedGrantTypes { get; set; }
+        public List<KeyValuePair<int, string>> AllowedCorsOrigins { get; set; }
+        public List<KeyValuePair<int, string>> PostLogoutRedirectUris { get; set; }
         public List<ClientClaimViewModel> Claims { get; set; }
         public List<ClientSecretViewModel> ClientSecrets { get; set; }
     }
