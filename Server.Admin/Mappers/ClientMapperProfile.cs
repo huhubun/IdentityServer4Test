@@ -173,6 +173,11 @@ namespace Server.Admin.Mappers
                 sources = new List<TSource>();
             }
 
+            if (destinations == null)
+            {
+                destinations = new List<TDestination>();
+            }
+
             var removeItems = new List<TDestination>();
             var addItems = sources.Where(newItemsWhere).Select(createDestExp);
 

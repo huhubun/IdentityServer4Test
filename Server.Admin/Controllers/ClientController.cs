@@ -29,18 +29,19 @@ namespace Server.Admin.Controllers
 
         public IActionResult Add()
         {
-            return View();
+            var model = new ClientViewModel();
+            return View(model);
         }
 
-        //[HttpPost]
-        //public IActionResult Add(ClientViewModel client)
-        //{
-        //    var clientEntity = client.ToEntity();
-        //    _configurationDbContext.Clients.Add(clientEntity);
-        //    _configurationDbContext.SaveChanges();
+        [HttpPost]
+        public IActionResult Add(ClientViewModel client)
+        {
+            var clientEntity = client.ToEntity();
+            _configurationDbContext.Clients.Add(clientEntity);
+            _configurationDbContext.SaveChanges();
 
-        //    return RedirectToAction(nameof(Edit), new { id = clientEntity.Id });
-        //}
+            return RedirectToAction(nameof(Edit), new { id = clientEntity.Id });
+        }
 
         public IActionResult Edit(int id)
         {
