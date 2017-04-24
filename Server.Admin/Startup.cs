@@ -63,7 +63,7 @@ namespace Server.Admin
             services.AddAutoMapper(config =>
             {
                 config.CreateMap<IdentityServer4.Models.Client, Server.Admin.Models.ClientViewModels.ClientViewModel>();
-            }, typeof(Mappers.ClientMapperProfile));
+            }, /*typeof(Mappers.ClientMapperProfile)*/Assembly.GetEntryAssembly());
 
             services.AddScoped<ConfigurationDbContext>();
         }

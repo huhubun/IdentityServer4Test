@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Server.Admin.Mappers;
 using Server.Admin.Models.ClientViewModels;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace Server.Admin.Controllers
@@ -51,7 +52,7 @@ namespace Server.Admin.Controllers
 
             return View(model);
 
-                
+
 
             //return View(Mapper.Map<ClientViewModel>(client.ToModel()));
         }
@@ -74,5 +75,38 @@ namespace Server.Admin.Controllers
             //return RedirectToAction(nameof(Edit), new { id = clientEntity.Id });
         }
 
+
+        #region ClientScopes
+
+        [HttpGet]
+        public IActionResult CreateScope(int clientId)
+        {
+            var model = new CreateScopeViewModel { ClientId = clientId };
+            return View(model);
+        }
+
+        [HttpPost]
+        public IActionResult CreateScope(CreateScopeViewModel model)
+        {
+            var entity = model.ToEntity();
+
+            var client = _configurationDbContext.Clients.Include(c => c.AllowedScopes).Single(c => c.Id == model.ClientId);
+            client.AllowedScopes.Add(entity);
+            _configurationDbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = model.ClientId });
+        }
+
+        [HttpGet]
+        public IActionResult DeleteScope(int clientId, int id)
+        {
+            var scopeSet = _configurationDbContext.Set<ClientScope>();
+            scopeSet.Remove(scopeSet.Find(id));
+            _configurationDbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = clientId });
+        }
+
+        #endregion
     }
 }
