@@ -2,19 +2,11 @@
 
 @{
     ViewData["Title"] = "Edit Client";
-    var allowedGrantTypes = Model.AllowedGrantTypes.ToList();
 }
 
 <h2>Edit Client</h2>
 
 <form asp-action="Edit">
-    <input type="hidden" asp-for="Id" />
-    @for (int i = 0; i < allowedGrantTypes.Count; i++)
-    {
-        <input type="hidden" asp-for="@allowedGrantTypes[i].Key" />
-        <input type="hidden" asp-for="@allowedGrantTypes[i].Value" />
-    }
-
     <div class="form-horizontal">
         <h4>Client Info</h4>
         <hr />
@@ -244,14 +236,6 @@
         </div>
     </div>
 </form>
-
-<div class="row">
-    @await Component.InvokeAsync("ClientScope", new { ClientId = Model.Id })
-</div>
-
-<div class="row">
-    @await Component.InvokeAsync("ClientSecret", new { ClientId = Model.Id })
-</div>
 
 <div>
     <a asp-action="Index">Back to List</a>

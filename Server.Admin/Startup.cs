@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using IdentityServer4.EntityFramework.DbContexts;
+﻿using IdentityServer4.EntityFramework.DbContexts;
 using IdentityServer4.EntityFramework.Mappers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -9,7 +8,6 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Server.Admin.Entity;
-using Server.Admin.Mappers;
 using System.Linq;
 using System.Reflection;
 
@@ -59,11 +57,6 @@ namespace Server.Admin
                 .AddOperationalStore(builder => builder.UseSqlServer(connectionString, options => options.MigrationsAssembly(migrationsAssembly)));
 
             services.AddMvc();
-
-            services.AddAutoMapper(config =>
-            {
-                config.CreateMap<IdentityServer4.Models.Client, Server.Admin.Models.ClientViewModels.ClientViewModel>();
-            }, /*typeof(Mappers.ClientMapperProfile)*/Assembly.GetEntryAssembly());
 
             services.AddScoped<ConfigurationDbContext>();
         }
