@@ -251,6 +251,10 @@
     @await Component.InvokeAsync("ClientScope", new { ClientId = Model.Id })
 </div>
 
+<div class="row">
+    @await Component.InvokeAsync("ClientSecret", new { ClientId = Model.Id })
+</div>
+
 <div>
     <a asp-action="Index">Back to List</a>
 </div>

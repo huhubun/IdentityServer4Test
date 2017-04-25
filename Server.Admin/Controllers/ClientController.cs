@@ -108,5 +108,12 @@ namespace Server.Admin.Controllers
         }
 
         #endregion
+
+        #region ClientSecret
+
+
+
+        #endregion
+
     }
 }
