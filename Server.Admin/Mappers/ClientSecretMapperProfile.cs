@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using IdentityServer4.EntityFramework.Entities;
+using IdentityServer4.Models;
 using Server.Admin.Models.ClientViewModels;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Server.Admin.Mappers
 {
@@ -12,7 +9,8 @@ namespace Server.Admin.Mappers
     {
         public ClientSecretMapperProfile()
         {
-            //CreateMap<ClientSecretViewModel, ClientSecret>();
+            CreateMap<CreateSecretViewModel, ClientSecret>()
+                .ForMember(dest => dest.Value, mo => mo.MapFrom(src => src.Value.Sha256()));
 
             CreateMap<ClientSecret, ClientSecretViewModel>();
         }

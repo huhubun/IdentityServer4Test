@@ -111,7 +111,34 @@ namespace Server.Admin.Controllers
 
         #region ClientSecret
 
+        [HttpGet]
+        public IActionResult CreateSecret(int clientId)
+        {
+            var model = new CreateSecretViewModel { ClientId = clientId };
+            return View(model);
+        }
 
+        [HttpPost]
+        public IActionResult CreateSecret(CreateSecretViewModel model)
+        {
+            var entity = model.ToEntity();
+
+            var client = _configurationDbContext.Clients.Include(c => c.ClientSecrets).Single(c => c.Id == model.ClientId);
+            client.ClientSecrets.Add(entity);
+            _configurationDbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = model.ClientId });
+        }
+
+        [HttpGet]
+        public IActionResult DeleteSecret(int clientId, int id)
+        {
+            var secretSet = _configurationDbContext.Set<ClientSecret>();
+            secretSet.Remove(secretSet.Find(id));
+            _configurationDbContext.SaveChanges();
+
+            return RedirectToAction(nameof(Edit), new { id = clientId });
+        }
 
         #endregion
 

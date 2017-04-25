@@ -10,5 +10,10 @@ namespace Server.Admin.Mappers
         {
             return Mapper.Map<ClientSecretViewModel>(entity);
         }
+
+        public static ClientSecret ToEntity(this CreateSecretViewModel model)
+        {
+            return Mapper.Map<ClientSecret>(model);
+        }
     }
 }
