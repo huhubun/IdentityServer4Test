@@ -18,7 +18,9 @@ Update-Database -Context MyContext
 ```
 
 ## Authentication 认证
-IdentityServer4 Document: [Token Endpoint](https://identityserver4.readthedocs.io/en/release/endpoints/token.html)  
+
+## Authorization 授权
+IdentityServer4 Document: [Token Endpoint](https://identityserver4.readthedocs.io/en/release/endpoints/token.html)  
 **GET** */.well-known/openid-configuration* 以获得支持的操作  
 
 ### Client Credentials Grant
