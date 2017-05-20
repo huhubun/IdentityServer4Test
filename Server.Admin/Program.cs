@@ -13,7 +13,12 @@ namespace Server.Admin
         {
             var host = new WebHostBuilder()
                 .UseKestrel()
+
+#if DEBUG
                 .UseUrls("http://localhost:25000")
+#else
+                .UseUrls("http://*:25000")
+#endif
                 .UseContentRoot(Directory.GetCurrentDirectory())
                 .UseIISIntegration()
                 .UseStartup<Startup>()

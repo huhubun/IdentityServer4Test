@@ -31,7 +31,7 @@ namespace Server.Admin
 
         public void ConfigureServices(IServiceCollection services)
         {
-            var connectionString = @"Data Source=bun-v-server;Initial Catalog=IdentityServer;Persist Security Info=True;User ID=sa;Password=as;";
+            var connectionString = Configuration.GetConnectionString("DefaultConnection");
             var migrationsAssembly = typeof(Startup).GetTypeInfo().Assembly.GetName().Name;
 
             services.AddDbContext<MyContext>(options =>

@@ -1,5 +1,9 @@
 # IdentityServer4Test
 
+## 发布
+通过 publish 文件夹下的 `publish.Staging.bat` 会以 *Staging* 配置发布 `Server.Admin` 项目到 `Server.Admin` 项目所在文件夹的 bin/staging-publish 文件夹下。  
+**注意**：请在 publish 文件夹下执行。
+
 ## 迁移
 ### dotnet ef 命令
 为了能在 Visual Studio 的“程序包管理器控制台”之外进行迁移，需要使用 `dotnet ef` 命令，使用该命令需要在项目文件（`.csproj`）中添加包 `Microsoft.EntityFrameworkCore.Tools.DotNet` 的引用：
@@ -32,6 +36,25 @@ Update-Database -Context MyContext
 dotnet ef migrations script --idempotent --context MyContext --output ./DbScripts/DbScript.sql
 ```
 可参见 `Server.Admin` 项目下的 `GenerateDbMigrationScript.bat` 批处理文件。
+
+## Docker
+See [Building Docker Images for .NET Core Applications - Microsoft Docs](https://docs.microsoft.com/zh-cn/dotnet/articles/core/docker/building-net-docker-images)
+
+### ASPNETCORE_ENVIRONMENT
+默认情况下，通过 `dotnet` 命令启动程序会以 *Production* 配置运行，在 Dockerfile 中配置了 `ASPNETCORE_ENVIRONMENT` 环境变量，我们的程序会以 *Staging* 配置运行。
+```Dockerfile
+ENV ASPNETCORE_ENVIRONMENT Staging
+```
+
+### 通过 Dockerfile 生成镜像
+```powershell
+docker build -t huhubun/idsv.admin.staging .
+```
+
+### 运行镜像
+```powershell
+docker run --name idsv.admin -d -p 8000:25000 huhubun/idsv.admin.staging
+```
 
 ## Authentication 认证
 
