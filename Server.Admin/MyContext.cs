@@ -20,8 +20,11 @@ namespace Server.Admin
             base.OnModelCreating(builder);
 
             builder.Entity<Test>().HasKey(t => t.Id);
+            builder.Entity<Sample>().HasKey(t => t.Id);
         }
 
         public DbSet<Test> Tests { get; set; }
+
+        public DbSet<Sample> Samples { get; set; }
     }
 }

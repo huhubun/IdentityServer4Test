@@ -1,6 +1,15 @@
 # IdentityServer4Test
 
 ## 迁移
+### dotnet ef 命令
+为了能在 Visual Studio 的“程序包管理器控制台”之外进行迁移，需要使用 `dotnet ef` 命令，使用该命令需要在项目文件（`.csproj`）中添加包 `Microsoft.EntityFrameworkCore.Tools.DotNet` 的引用：
+```xml
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
+  </ItemGroup>
+```
+此后，在 cmd 或 Powershell 中，处在与 `Server.Admin.csproj` 文件同级的目录下，就可以使用 `dotnet ef` 命令了。
+
 ### IdentityServer
 IdentityServer4 添加迁移，参见官方文档 [Using EntityFramework Core for configuration data](https://identityserver4.readthedocs.io/en/release/quickstarts/8_entity_framework.html)，节选如下：
 ```powershell
@@ -16,6 +25,13 @@ IdentityServer 带有两个 DbContext，需要通过 `-Context` 进行指定，`
 Add-Migration ImportASPNETCoreIdentity -Context MyContext -OutputDir Migrations/MyContextEntity
 Update-Database -Context MyContext
 ```
+
+### 迁移脚本
+通过 `dotnet ef` 命令可以生成迁移脚本，增加参数 `--idempotent` 以导出适用于各个不同迁移版本数据库的 SQL 脚本（例如：SQL 脚本会增加判断该表是否存在）
+```powershell
+dotnet ef migrations script --idempotent --context MyContext --output ./DbScripts/DbScript.sql
+```
+可参见 `Server.Admin` 项目下的 `GenerateDbMigrationScript.bat` 批处理文件。
 
 ## Authentication 认证
 

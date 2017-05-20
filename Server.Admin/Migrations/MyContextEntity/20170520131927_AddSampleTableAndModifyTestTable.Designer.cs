@@ -8,9 +8,10 @@ using Server.Admin;
 namespace Server.Admin.Migrations.MyContextEntity
 {
     [DbContext(typeof(MyContext))]
-    partial class MyContextModelSnapshot : ModelSnapshot
+    [Migration("20170520131927_AddSampleTableAndModifyTestTable")]
+    partial class AddSampleTableAndModifyTestTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
             modelBuilder
                 .HasAnnotation("ProductVersion", "1.1.1")

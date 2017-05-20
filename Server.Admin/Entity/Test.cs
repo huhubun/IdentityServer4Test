@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace Server.Admin.Entity
 {
@@ -10,5 +7,7 @@ namespace Server.Admin.Entity
         public int Id { get; set; }
 
         public string Name { get; set; }
+
+        public DateTime InsertDate { get; set; }
     }
 }

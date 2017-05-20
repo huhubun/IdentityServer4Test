@@ -6,6 +6,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="DbScripts\**" />
+    <Content Remove="DbScripts\**" />
+    <EmbeddedResource Remove="DbScripts\**" />
+    <None Remove="DbScripts\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="GenerateDbMigrationScript.bat" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="Views\Account\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Controllers\" />
@@ -28,6 +39,7 @@
   </ItemGroup>
   <ItemGroup>
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="1.0.0" />
+    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="1.0.1" />
   </ItemGroup>
 
 
